@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTMLCollection과 NodeList</title>
+</head>
+
+<body>
+	점심 식단
+	<article id="container">
+		<ul>
+			<li>탕수육</li>
+			<li class="item-second">유산슬</li>
+			<li class="item-third">짜장면</li>
+		</ul>
+	</article>
+	저녁 식단
+	<article>
+		<ul>
+			<li>된장국</li>
+			<li class="item-second">김치찌게</li>
+			<li>해장국</li>
+		</ul>
+	</article>
+
+	<script>
+		const container = document.getElementById('container');
+
+		console.log(container.querySelectorAll('li'));
+		console.log(container.getElementsByTagName('li'));
+
+		const listItem = document.createElement('li');
+		container.append(listItem);
+
+		console.log('------------');
+		console.log(container.querySelectorAll('li'));
+		console.log(container.getElementsByTagName('li'));
+
+		const target = document.querySelector('.item-third');
+		target.remove();
+
+		console.log('------------');
+		console.log(container.querySelectorAll('li'));
+		console.log(container.getElementsByTagName('li'));
+
+		//  NodeList는 새로운 요소가 추가되거나 삭제되는 것은 반영이 안되지만 가지고 있는 요소의 정보가 업데이트 되는 것은 반영되기 때문에 완전 정적인 것은 아니다.
+		container.querySelector('.item-second').textContent = '라조기';
+		container.querySelector('.item-second').classList.add('new');
+	</script>
+</body>
+
+</html>

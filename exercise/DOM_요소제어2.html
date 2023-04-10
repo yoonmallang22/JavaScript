@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM 제어 | 요소 제어</title>
+</head>
+
+<body>
+	<ul></ul>
+	<button>Make me MORE!</button>
+
+	<script>
+		const myBtn = document.querySelector("button");
+		const myUl = document.querySelector("ul");
+
+		myBtn.addEventListener('click', function () {
+			for (let i = 0; i < 5; i++) {
+				const myLi = document.createElement('li');
+				const btnDel = document.createElement('button');
+				const btnTxt = document.createTextNode = '버튼';
+
+				btnDel.append(btnTxt);	// appendChild()와 달리 텍스트도 자식 노드로 포함시킬 수 있다
+				btnDel.addEventListener('click', () => {
+					myLi.remove();
+				});
+
+				myLi.append('삭제하기: ', btnDel);	// appendChild()와 달리 여러 개의 노드를 한번에 자식 노드로 포함시킬 수 있다
+				myUl.appendChild(myLi);
+			}
+		});
+	</script>
+</body>
+
+</html>

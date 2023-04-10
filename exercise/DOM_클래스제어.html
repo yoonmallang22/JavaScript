@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM 제어 | 클래스 제어</title>
+	<style>
+		.blue {
+			background-color: royalblue;
+		}
+	</style>
+</head>
+
+<body>
+	<button type="button">Make me BLUE!</button>
+
+	<script>
+		const myBtn = document.querySelector("button");
+
+		myBtn.addEventListener('click', function () {
+			myBtn.classList.add("blue");				// 'blue'라는 클래스의 속성값을 지정한다
+			// myBtn.classList.remove("blue");     // 클래스를 제거한다
+			// myBtn.classList.toggle("blue");     // 클래스가 없으면 넣어주고 있으면 제거한다
+			console.log(myBtn.classList.contains("blue"));   // 해당하는 클래스가 있는지 확인한다
+		})
+	</script>
+</body>
+
+</html>

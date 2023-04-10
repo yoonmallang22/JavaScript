@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM 제어 | 요소 제어</title>
+</head>
+
+<body>
+	<ul></ul>
+	<button>Make me MORE!</button>
+
+	<script>
+		const myBtn = document.querySelector("button");
+		const myUl = document.querySelector("ul");
+
+		myBtn.addEventListener('click', function () {
+			for (let i = 0; i < 5; i++) {
+				const myLi = document.createElement('li');
+				const myText = document.createTextNode(i);
+				myLi.appendChild(myText);
+				myUl.appendChild(myLi);
+			}
+
+			const li = myUl.querySelector('li');
+			myUl.removeChild(li);
+		})
+	</script>
+</body>
+
+</html>
