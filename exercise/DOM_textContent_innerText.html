@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM 제어 | textContent / innerText</title>
+</head>
+
+<body>
+	<h3>원본 요소:</h3>
+	<p id="source">
+		<style>#source { color: red; }</style>
+		아래에서<br>이 글을<br>어떻게 인식하는지 살펴보세요.
+		<span style="display:none">숨겨진 글</span>
+	</p>
+	<h3>textContent 결과:</h3>
+	<textarea id="textContentOutput" rows="6" cols="30" readonly>...</textarea>
+	<h3>innerText 결과:</h3>
+	<textarea id="innerTextOutput" rows="6" cols="30" readonly>...</textarea>
+
+	<script>
+		const source = document.getElementById('source');
+		const textContentOutput = document.getElementById('textContentOutput');
+		const innerTextOutput = document.getElementById('innerTextOutput');
+
+		textContentOutput.innerHTML = source.textContent;
+		innerTextOutput.innerHTML = source.innerText;
+
+		// mdn 에 따르면 innerText는 사용자가 커서를 이용해 요소의 콘텐츠를 선택하고 클립보드에 복사했을 때 얻을 수 있는 텍스트의 근삿값을 제공한다. 예를 들어 네이버 메인페이지의 특정 텍스트를 복사에서 메모장에 붙여넣기한다고 가정했을 때, 텍스트의 줄바꿈 같은 것은 가져오지만 폰트의 굵기나 색상까지 가져오지 않는 것과 같다.
+		// 따라서 innerText는 display:none으로 인해 제거되는 텍스트, br 태그를 통해 줄바꿈되는 텍스트의 형태는 인식하지만 색상이나 굵기, 사이즈 등의 정보는 인식하지 못하는 것 같다. 명세서를 봐도 Returns the element's text content "as rendered"라고만 표현하고 있고 구체적으로 어떤 의미인지는 나오지 않는다.
+	</script>
+</body>
+
+</html>

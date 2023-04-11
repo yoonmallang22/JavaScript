@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM 제어 | textContent</title>
+</head>
+
+<body>
+	<div class="click">
+		<p></p>
+		<input type="text">
+		<button>Write Something!</button>
+	</div>
+	<div class="input">
+		<p></p>
+		<input type="text">
+		<button>Write Something!</button>
+	</div>
+	
+	<script>
+		const click = document.querySelector(".click");
+		const myBtn = click.querySelector("button");
+		const myP = click.querySelector("p");
+		const myInput = click.querySelector("input");
+
+		myBtn.addEventListener('click', function () {
+			myP.textContent = myInput.value;
+		});
+
+		const input = document.querySelector(".input");
+		const myP2 = input.querySelector("p");
+		const myInput2 = input.querySelector("input");
+
+		// input 요소에 'input' 이벤트를 연결하면 실시간으로 값이 반영되게 만들 수도 있다
+		myInput2.addEventListener('input', () => {
+			myP2.textContent = myInput2.value;
+		});
+	</script>
+</body>
+
+</html>
