@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>호이스팅</title>
+</head>
+
+<body>
+	<script>
+		// 호이스팅(함수나 변수를 스코프의 최상단으로 끌어올려지는 현상)
+		// 인터프리터가 변수와 함수의 메모리 공간을 선언 전에 미리 할당하는 것을 의미
+		console.log(함수(10)); // 110
+		function 함수(x) {
+			return x + 100;
+		}
+
+		console.log(x); // Cannot access 'x' before initialization
+		let x = 10;
+
+		console.log(함수2(10)); // Cannot access '함수2' before initialization
+		let 함수2 = (x) => x + 100;
+
+		console.log(함수3(10)); // Cannot access '함수3' before initialization
+		const 함수3 = function 함수3() {
+			return (x) => x + 100;
+		};
+
+		// 참고자료 : https://hanamon.kr/javascript-%ED%98%B8%EC%9D%B4%EC%8A%A4%ED%8C%85%EC%9D%B4%EB%9E%80-hoisting/
+		// JS의 모든 선언은 호이스팅(선언이 먼저 메모리에 저장)이 일어난다
+		// 그러나 let, const, class 이용한 선언문은 호이스팅이 되었지만 안된 것처럼 동작한다
+		// 이러한 현상은 일시적 사각지대(Temporal Dead Zone)에 빠지기 때문이다
+		// 중요한 포인트는 그렇다하여 호이스팅이 안된 것은 아니라는 것!
+		// 오류가 나는 이유는 var 키워드는 선언과 함께 undefined로 초기화지만
+		// let과 const는 초기화 되지 않는 상태로 선언만 메모리 저장한다
+
+		let foo = 1;
+
+		{
+			console.log(foo);	// 일시적 사각지대	
+			// Cannot access 'foo' before initialization
+			let foo = 2;
+		}
+
+		let a = 10;
+
+		if (true) {
+			let a = 20;
+			if (true) {
+				console.log(a);	// 일시적 사각지대
+				let a = 30;
+			}
+		}
+
+		console.log(add1(10, 20)); // 30
+		console.log(add2(10, 20)); // 30
+
+		function add1(x, y) {
+			return x + y;
+		}
+
+		function add2(x, y) {
+			return x + y;
+		}
+
+		console.log(mul1); // undefined
+		console.log(mul1(10, 20)); // not a function
+		console.log(mul2); // Cannot access 'mul2' before initialization
+		console.log(mul2(10, 20)); // 위와 같은 에러
+		console.log(mul3) // mul3 is not defined. 호이스팅이 안되었기 때문
+
+		var mul1 = function (a, b) {
+			return a * b;
+		};
+
+		let mul2 = function (a, b) {
+			return a * b;
+		};
+
+		console.log(test);	// Cannot access 'test' before initialization
+		console.log(test2);	// undefined
+
+		let test = 100;
+		var test2 = 100;
+	</script>
+</body>
+
+</html>
