@@ -102,6 +102,11 @@ function attackBeam() {	// 레이저 공격
 }
 
 function attackKnife() {	// 칼 공격
+	if (this.name === "thanos") {
+    // 나를 호출한 애한테 각각 다르게 동작을 주고 싶을 때 this를 사용하면 된다
+    this.hp -= 1;
+    return;
+  }
   this.hp -= 5;
 }
 
@@ -115,15 +120,17 @@ let zombie = {
 
 let thanos = {
   name: "thanos",
-  damaged: attackBeam,
-  hp: 1000,
+  damaged1: attackBeam,
+  damaged2: attackKnife,
+  hp: 10000,
   power: 100,
 };
 
 zombie.damaged1();
 zombie.damaged2();
 console.log(zombie);	// {name: 'zombie', hp: 9975, power: 2, damaged1: ƒ, damaged2: ƒ}
-console.log(thanos);	// {name: 'thanos', hp: 1000, power: 100, damaged: ƒ}
+thanos.damaged2();
+console.log(thanos);	// {name: 'thanos', hp: 9999, power: 100, damaged: ƒ}
 
 /* ----------------------------------- */
 
