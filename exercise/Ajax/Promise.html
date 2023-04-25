@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Promise</title>
+</head>
+
+<body>
+	<script>
+		// 커피 주문하는 프로미스 객체를 생성
+		// 생성자에는 약속을 지키기 위한 resolve 함수와 약속을 지키지 못했을 때를 대비한 reject 함수(executor 함수)를 인자로 전달한다
+		const orderCoffee = new Promise((resolve, reject) => {
+			const requestObj = new XMLHttpRequest();
+			requestObj.open('GET', 'orderCoffee.txt');
+			requestObj.onreadystatechange = () => {
+				if (requestObj.readyState == 4 && requestObj.status == 200) {
+					const result = requestObj.responseText;
+
+					// resolve 메소드가 실행되면 then 메소드가 자동으로 호출된다
+					resolve(result);
+
+					// resolve 메소드 호출이 없는 상태에서 reject 메소드가 실행되거나 통신에 문제가 발생하면 catch 메소드가 자동으로 호출된다
+					// reject(result);
+				}
+			};
+			requestObj.send();
+		});
+
+		// then 메소드를 사용하면 비동기 코드를 마치 동기적인 코드처럼 작성할 수 있다
+
+		// resolve 메소드가 실행될때 전달된 인자는 then 메소드의 콜백함수의 인자로 전달된다
+		orderCoffee.then((asyncResult) => {
+			console.log(asyncResult);
+			console.log('약속이 이루어졌습니다.');
+			return asyncResult;
+		}).catch((error) => {	// then 메소드는 프라미스 객체를 반환하기 때문에 catch 메소드를 이어서 쓰는것이 가능하다
+			console.log(new Error('커피주문이 정상적으로 이뤄지지 않았습니다.'));
+		})
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>greeting app</title>
+</head>
+
+<body>
+	<script>
+		'use strict';
+
+		class UserStorage {
+
+			// 유저가 등록되었는지 확인
+			async searchUser(userName, password) {
+				const data = await fetch('users.json');
+				const response = await data.json();
+
+				const result = response.user.find((item) => {
+					return item.userName === userName && item.password === password;
+				});
+
+				if (result) {
+					return userName;
+				} else {
+					console.log(new Error('user not found'));
+				}
+			}
+
+			// 등록된 유저에 따른 인사말을 출력
+			async sayHi(user) {
+				const data = await fetch('greetings.json');
+				const response = await data.json();
+				const result = response.greetings.find((item) => {
+					return item.userName === user;
+				});
+
+				if (result) {
+					return { name: result.userName, greetings: result.greetings };
+				} else {
+					console.log(new Error('no greetings'));
+				}
+			}
+		}
+
+		const userStorage = new UserStorage();
+
+		const userName = prompt('이름을 입력하세요');
+		const password = prompt('비밀번호를 입력하세요');
+
+		try {
+			(async function () {
+				const user = await userStorage.searchUser(userName, password);
+				const result = await userStorage.sayHi(user);
+				alert(`안녕하세요! ${result.name}님 ${result.greetings}`);
+			})();
+		} catch (error) {
+			console.log(new Error(error));
+		}
+	</script>
+</body>
+
+</html>
