@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Strict mode</title>
+</head>
+
+<body>
+	<script>
+		'use strict'
+
+		// 선언하지 않은 변수에 값을 할당할 수 없다
+		str = 'hello';	// str is not defined
+
+		// 읽기 전용 객체에 값을 할당하면 에러가 발생한다
+		// 일반 모드에서는 조용한 에러(무시처리)
+		undefined = 10;	// Cannot assign to read only property 'undefined' of object '#<Window>'
+		Infinity = 10;	// Cannot assign to read only property 'Infinity' of object '#<Window>'
+		Math.PI = 0;		// Cannot assign to read only property 'PI' of object '#<Object>'
+
+		// 지울수 없는 값을 지우려고 하면 에러가 발생한다
+		const obj = {
+			firstName: 'mallang',
+			lastName: 'yoon'
+		}
+
+		delete obj.lastName
+		console.log(obj);					// {firstName: 'mallang'}
+
+		delete Object.prototype;	// Cannnot delete property 'prototype' of function Object() { [native code] }
+
+		// 함수 파라미터에 중복된 이름을 사용할 수 없다
+		function myFunc(a, a, b) {	// Duplicate parameter name not allowed in this context
+			console.log(a + a + b);
+		}
+
+		// 일반 모드에서는 7
+		myFunc(1, 2, 3)
+	</script>
+</body>
+
+</html>
